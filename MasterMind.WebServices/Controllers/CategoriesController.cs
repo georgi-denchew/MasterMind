@@ -69,6 +69,8 @@ namespace MasterMind.WebServices.Controllers
                         throw new InvalidOperationException("Invalid category");
                     }
 
+
+
                     var result = new CategoryEventsModel()
                     {
                         Id = category.Id,
