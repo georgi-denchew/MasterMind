@@ -1,4 +1,5 @@
 ﻿using MasterMind.Models;
+using MasterMind.WebServices.Headers;
 using MasterMind.WebServices.Models;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Net.Http;
 using System.Text;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.ValueProviders;
 
 namespace MasterMind.WebServices.Controllers
 {
@@ -91,6 +93,21 @@ namespace MasterMind.WebServices.Controllers
                     return response;
                 }
             });
+        }
+
+        [HttpGet, ActionName("logout")]
+        public HttpResponseMessage LogoutUser([ValueProvider(typeof(HeaderValueProviderFactory<string>))] string sessionKey)
+        {
+            return this.PerformOperationAndHandleExceptions(() =>
+                {
+                    var context = this.ContextFactory.Create();
+                    var user = this.LoginUser(sessionKey, context);
+
+                    user.SessionKey = null;
+                    context.SaveChanges();
+
+                    return new HttpResponseMessage(HttpStatusCode.OK);
+                });
         }
 
         private string GenerateSessionKey(int userId)

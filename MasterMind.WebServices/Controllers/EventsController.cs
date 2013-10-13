@@ -62,8 +62,8 @@ namespace MasterMind.WebServices.Controllers
 
                     category.Events.Add(newEvent);
                     context.SaveChanges();
-
-                    return new HttpResponseMessage(HttpStatusCode.Created);
+                    
+                    return this.Request.CreateResponse(HttpStatusCode.Created);
                 });
         }
 
