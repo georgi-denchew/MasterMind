@@ -80,6 +80,9 @@ namespace MasterMind.WebServices.Controllers
                                 {
                                     Id = ev.Id,
                                     CategoryName = ev.Category.Name,
+                                    Description = ev.Description,
+                                    Duration = ev.Duration,
+                                    StartDate = ev.StartTime,
                                     Latitude = ev.Latitude,
                                     Longitude = ev.Longitude,
                                     Name = ev.Name,
